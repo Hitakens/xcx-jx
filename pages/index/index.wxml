@@ -1,0 +1,18 @@
+<view catchtouchmove="preventTouchMove" class="mask" wx:if="{{showModal}}"></view>
+<view class="modalDlg" wx:if="{{showModal}}">
+    <image src="../imges/logo.png"></image>
+    <text class="text">请点击下面开始授权</text>
+    <text class="text" style="color:red">拒绝授权将无法正常登录</text>
+    <button bindgetuserinfo="ok" class="btn" openType="getUserInfo">开始授权</button>
+</view>
+<view class="mainView">
+    <image src="../imges/logo.png" style="width:140px;height:140px;margin-top: 30px;margin-bottom:30px;"></image>
+    <button bindtap="login" class="btn" openType="button">学员登录</button>
+</view>
+<view class="content">
+    <view class="adminview">
+        <view style="display: flex;flex-direction: row-reverse;">
+            <button bindtap="agentlogin" class="btnadmin" openType="button">管理</button>
+        </view>
+    </view>
+</view>
