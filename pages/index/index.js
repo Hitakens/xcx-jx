@@ -68,17 +68,15 @@ Page({
                     'content-type': 'application/json'
                   },
                   success: function(res) {
-                    console.log(res)
                     wx.hideLoading();
-                    var ul = app.globalData.pathUrl+'/getcz.html?js_code=' + wx.getStorageSync('userInfo').code + '&avatarUrl=' + wx.getStorageSync('userInfo').avatarUrl + '&nickName='+wx.getStorageSync('userInfo').nickName;
-                    console.log(ul)
-                    if (res.data=="0"){
+                    if (res.data.code=="0"){
+                      console.log(app.globalData.pathUrl + '/getcz.html?stuid=' + res.data.stuid + '&imgurl=' + wx.getStorageSync('userInfo').avatarUrl)
                       wx.navigateTo({
-                        url: "../web/web?url=" + encodeURIComponent(ul)
+                        url: "../web/web?url=" + encodeURIComponent(app.globalData.pathUrl + '/getcz.html?stuid=' + res.data.stuid + '&imgurl=' + wx.getStorageSync('userInfo').avatarUrl)
                       });
                     }else{
                       wx.navigateTo({
-                        url: "../web/web?url=" + encodeURIComponent(app.globalData.pathUrl+"/main/index?openid=" + res.data)
+                        url: "../web/web?url=" + encodeURIComponent(app.globalData.pathUrl + "/joinpage?openid=" + res.data.stu_id)
                       });
                     }
                      

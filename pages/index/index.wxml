@@ -12,7 +12,7 @@
 <view class="content">
     <view class="adminview">
         <view style="display: flex;flex-direction: row-reverse;">
-            <button bindtap="agentlogin" class="btnadmin" openType="button">管理</button>
+          <!--<button bindtap="agentlogin" class="btnadmin" openType="button">管理</button>-->
         </view>
     </view>
 </view>
