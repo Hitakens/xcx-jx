@@ -190,3 +190,8 @@
     height: 3rem;
     align-items: center;
 }
+.img-logo{
+   border-radius: 12rem;
+   overflow: hidden;
+   will-change: transform;
+}

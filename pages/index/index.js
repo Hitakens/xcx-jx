@@ -51,7 +51,31 @@ Page({
       }
     });
   },
+  getyhinfo: function () {
+    var that = this
+    var userInfo = wx.getStorageSync('userInfo');
+    if (true) {
+      wx.login({
+        success: function (res) {
+          if (res.code) {
+            wx.getUserInfo({
+              success: function (res1) {
+                var objz = {};
+                objz.avatarUrl = res1.userInfo.avatarUrl;
+                objz.nickName = res1.userInfo.nickName;
+                objz.code = res.code;
+                wx.setStorageSync('userInfo', objz); //存储userInfo
+              }
+            });
+          } else {
+            console.log('获取用户登录态失败！' + res.errMsg)
+          }
+        }
+      });
+    }
+  },
   login: function() {
+   this.getyhinfo(); 
     wx.showLoading({
       title: "正在努力登录...",
       mask: !0
@@ -74,12 +98,17 @@ Page({
                       wx.navigateTo({
                         url: "../web/web?url=" + encodeURIComponent(app.globalData.pathUrl + '/getcz.html?stuid=' + res.data.stuid + '&imgurl=' + wx.getStorageSync('userInfo').avatarUrl)
                       });
-                    }else{
+                    } else if (res.data.code == "1"){
                       wx.navigateTo({
-                        url: "../web/web?url=" + encodeURIComponent(app.globalData.pathUrl + "/joinpage?openid=" + res.data.stu_id)
+                        url: "../web/web?url=" + encodeURIComponent(app.globalData.pathUrl + "/joinpage?sid=" + res.data.stuid)
+                      });
+                    }else{
+                      wx.hideLoading(), wx.showToast({
+                        title: "登录失败,请稍后重试!",
+                        icon: "none"
                       });
                     }
-                     
+                   
                   },
                   fail: function() {
                     wx.hideLoading(), wx.showToast({
@@ -89,26 +118,6 @@ Page({
                   }
                 });
           
- },
-  agentlogin: function() {
-    wx.showLoading({
-      title: "正在努力登录...",
-      mask: !0
-    }), wx.getSetting({
-      success: function(t) {
-        wx.hideLoading(), t.authSetting["scope.userInfo"] ? wx.navigateTo({
-          url: "../web/web?url=" + encodeURIComponent("https://f2.fastvip.cn/agentlogin.html")
-        }) : wx.showToast({
-          title: "您没有授权!无法登录.",
-          icon: "none"
-        });
-      },
-      fail: function() {
-        wx.hideLoading(), wx.showToast({
-          title: "登录失败,请稍后重试!",
-          icon: "none"
-        });
-      }
-    });
-  }
+ }
+  
 });

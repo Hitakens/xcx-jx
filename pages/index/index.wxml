@@ -1,6 +1,6 @@
 <view catchtouchmove="preventTouchMove" class="mask" wx:if="{{showModal}}"></view>
 <view class="modalDlg" wx:if="{{showModal}}">
-    <image src="../imges/logo.png"></image>
+    <image class='img-logo' src="../imges/logo.png"></image>
     <text class="text">请点击下面开始授权</text>
     <text class="text" style="color:red">拒绝授权将无法正常登录</text>
     <button bindgetuserinfo="ok" class="btn" openType="getUserInfo">开始授权</button>
